@@ -22,6 +22,53 @@ $reportPath = Join-Path $reportFolder 'contractor-review.csv'
 # Read the employee roster.
 $employees = @(Import-Csv -LiteralPath $inputPath)
 
+# Validate the roster before evaluating any accounts.
+if ($employees.Count -eq 0) {
+    throw 'The employee roster contains no records.'
+}
+
+$requiredColumns = @(
+    'EmployeeId'
+    'DisplayName'
+    'UserPrincipalName'
+    'EmployeeType'
+    'Department'
+    'EndDate'
+    'AccountEnabled'
+)
+
+$actualColumns = $employees[0].PSObject.Properties.Name
+
+foreach ($column in $requiredColumns) {
+    if ($column -notin $actualColumns) {
+        throw "Missing required CSV column: $column"
+    }
+}
+
+foreach ($employee in $employees) {
+    if ([string]::IsNullOrWhiteSpace($employee.EmployeeId)) {
+        throw 'An employee record has a missing EmployeeId.'
+    }
+
+    # Remove surrounding spaces before checking identifiers.
+    $employee.EmployeeId = $employee.EmployeeId.Trim()
+
+    if ($employee.EmployeeType -notin @('Employee', 'Contractor')) {
+        throw "Invalid EmployeeType for $($employee.EmployeeId). Use Employee or Contractor."
+    }
+}
+
+$duplicateIds = @(
+    $employees |
+        Group-Object -Property EmployeeId |
+        Where-Object { $_.Count -gt 1 }
+)
+
+if ($duplicateIds.Count -gt 0) {
+    $duplicateNames = $duplicateIds.Name -join ', '
+    throw "Duplicate EmployeeId values found: $duplicateNames"
+}
+
 # Evaluate contractors only.
 $report = @(
     foreach ($employee in $employees) {
