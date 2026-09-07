@@ -1,0 +1,6 @@
+﻿"EmployeeId","DisplayName","UserPrincipalName","EndDate","AccountEnabled","ReviewDate","Status"
+"CTR001","Jordan Lee","jordan.lee@example.com","2026-08-31","True","2026-09-07","Offboarding required"
+"CTR002","Taylor Brooks","taylor.brooks@example.com","2026-12-31","True","2026-09-07","No action: contract not expired"
+"CTR003","Casey Rivera","casey.rivera@example.com","2026-08-15","False","2026-09-07","Already disabled"
+"CTR004","Morgan Chen","morgan.chen@example.com","","True","2026-09-07","Review: missing end date"
+"CTR005","Riley Patel","riley.patel@example.com","2026-09-07","True","2026-09-07","No action: contract not expired"
