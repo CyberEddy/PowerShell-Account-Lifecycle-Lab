@@ -91,6 +91,13 @@ changed to `Offboarding required`.
 Invalid-date and invalid-account-status handling are implemented
 but have not yet been tested.
 
+A missing-column test renamed `EmployeeType` to `EmployeeTyp`.
+The script correctly stopped with:
+`Missing required CSV column: EmployeeType`.
+
+The original CSV was restored, and a subsequent baseline run
+produced the expected contractor results.
+
 ## Downloaded Script Troubleshooting
 
 If PowerShell blocks the downloaded script as unsigned, review
@@ -110,10 +117,14 @@ be signed.
 - Disabled contractors are reported without further end-date checks.
 - Complete CSV schema and duplicate-record validation are not yet implemented.
 - This is a learning lab, not a production offboarding tool.
+- Input validation checks for empty rosters, required columns,
+  missing employee IDs, invalid employee types, and duplicate IDs.
+  Missing-column handling has been tested; the other validation
+  checks have not yet been individually tested.
 
 ## Planned Improvements
 
-- Add input validation and automated tests.
+- Expand validation coverage and add automated tests.
 - Generate a separate report containing only actionable findings.
 - Add account actions within an isolated test environment.
 - Document safeguards before introducing account changes.
