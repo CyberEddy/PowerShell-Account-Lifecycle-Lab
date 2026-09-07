@@ -1,0 +1,7 @@
+EmployeeId,DisplayName,UserPrincipalName,EmployeeType,Department,EndDate,AccountEnabled
+EMP001,Avery Morgan,avery.morgan@example.com,Employee,IT,,True
+CTR001,Jordan Lee,jordan.lee@example.com,Contractor,Finance,2026-08-31,True
+CTR002,Taylor Brooks,taylor.brooks@example.com,Contractor,Operations,2026-12-31,True
+CTR003,Casey Rivera,casey.rivera@example.com,Contractor,HR,2026-08-15,False
+CTR004,Morgan Chen,morgan.chen@example.com,Contractor,IT,,True
+CTR005,Riley Patel,riley.patel@example.com,Contractor,Programs,2026-09-07,True
